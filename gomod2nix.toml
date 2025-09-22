@@ -1,0 +1,6 @@
+schema = 3
+
+[mod]
+  [mod."github.com/dslipak/pdf"]
+    version = "v0.0.2"
+    hash = "sha256-E+RC2+HIdj5xyC+QGikVt4GAhtFu6hgeuVska3Hg71g="
