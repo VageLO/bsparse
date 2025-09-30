@@ -1,4 +1,4 @@
-module main
+module alfa
 
 go 1.22.3
 
