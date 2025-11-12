@@ -1,4 +1,4 @@
-module alfa
+module pdf-parse
 
 go 1.22.3
 

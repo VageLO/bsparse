@@ -52,7 +52,12 @@ func main() {
         panic("flag -f can't be empty")
     }
 
-    Path = *filePathFlag
+	t := GetTransactions(*filePathFlag)
+    Csv(t)
+}
+
+func GetTransactions(path string) {
+	Path = path
 
 	r, err := pdf.Open(Path)
 	check(err)
@@ -106,8 +111,7 @@ func main() {
 			sentence.S = ""
 		}
 	}
-    transactions.sort()
-	csv(transactions)
+    return transactions.sort()
 }
 
 func parse(array []pdf.Text) string {
@@ -170,7 +174,7 @@ func changeExtToCSV(path string) string {
     return filepath.Join(filepath.Dir(path), strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)) + ".csv")
 }
 
-func csv(t []Transaction) {
+func Csv(t []Transaction) {
     Path = changeExtToCSV(Path)
 	file, err := os.Create(Path)
 	check(err)
