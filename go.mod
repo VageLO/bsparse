@@ -1,4 +1,4 @@
-module pdf-parse
+module github.com/VageLO/pdf-parse
 
 go 1.22.3
 
