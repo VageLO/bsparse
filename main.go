@@ -56,7 +56,7 @@ func main() {
     Csv(t)
 }
 
-func GetTransactions(path string) {
+func GetTransactions(path string) TransactionSlice {
 	Path = path
 
 	r, err := pdf.Open(Path)
