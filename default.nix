@@ -14,7 +14,7 @@
 }:
 
 buildGoApplication {
-  pname = "alfa";
+  pname = "bsparse";
   version = "0.1";
   pwd = ./.;
   src = ./cmd/alfa;
