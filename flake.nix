@@ -41,7 +41,7 @@
         go-lint = pkgs.stdenvNoCC.mkDerivation {
           name = "go-lint";
           dontBuild = true;
-          src = ./.;
+          src = ./cmd/alfa;
           doCheck = true;
           nativeBuildInputs = with pkgs; [
             golangci-lint

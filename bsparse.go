@@ -1,7 +1,6 @@
-package main
+package bsparse
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -34,7 +33,7 @@ type Transaction struct {
 	description string
 }
 
-type TransactionSlice []Transaction 
+type TransactionSlice []Transaction
 
 var Path string
 
@@ -42,18 +41,6 @@ func check(err error) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func main() {
-    filePathFlag := flag.String("f", "", "Parse provided pdf")
-    flag.Parse()
-
-    if *filePathFlag == "" {
-        panic("flag -f can't be empty")
-    }
-
-	t := GetTransactions(*filePathFlag)
-    Csv(t)
 }
 
 func GetTransactions(path string) TransactionSlice {
@@ -111,7 +98,10 @@ func GetTransactions(path string) TransactionSlice {
 			sentence.S = ""
 		}
 	}
-    return transactions.sort()
+
+    transactions.sort()
+
+    return transactions
 }
 
 func parse(array []pdf.Text) string {

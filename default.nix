@@ -17,6 +17,6 @@ buildGoApplication {
   pname = "alfa";
   version = "0.1";
   pwd = ./.;
-  src = ./.;
+  src = ./cmd/alfa;
   modules = ./gomod2nix.toml;
 }

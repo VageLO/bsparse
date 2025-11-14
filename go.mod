@@ -1,4 +1,4 @@
-module github.com/VageLO/pdf-parse
+module github.com/VageLO/bsparse
 
 go 1.22.3
 
