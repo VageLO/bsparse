@@ -17,6 +17,6 @@ buildGoApplication {
   pname = "bsparse";
   version = "0.1";
   pwd = ./.;
-  src = ./cmd/alfa;
+  src = ./.;
   modules = ./gomod2nix.toml;
 }
