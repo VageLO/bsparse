@@ -23,14 +23,14 @@ var (
 )
 
 type Transaction struct {
-	id          string
-	date        string
-	time        string
-	typeof      string
-	status      string
-	price       string
-	acronym     string
-	description string
+	Id          string
+	Date        string
+	Time        string
+	Typeof      string
+	Status      string
+	Price       string
+	Acronym     string
+	Description string
 }
 
 type TransactionSlice []Transaction
@@ -93,7 +93,7 @@ func GetTransactions(path string) TransactionSlice {
 				temp_str = ""
 				transaction = Transaction{}
 			}
-			transaction.id = TransactionNum.FindString(sentence.S)
+			transaction.Id = TransactionNum.FindString(sentence.S)
 			tranID = i + 1
 			sentence.S = ""
 		}
@@ -132,30 +132,30 @@ func extractRegex(str string, transaction *Transaction) {
 		typeIndex = TransactionType.FindStringIndex(str)
 		find := str[typeIndex[0]:(typeIndex[1] - 2)]
 		find = strings.Trim(find, " ")
-		transaction.typeof = find
+		transaction.Typeof = find
 	}
 	if PriceWithAcronym.MatchString(str) {
 		priceIndex = PriceWithAcronym.FindStringIndex(str)
 		price_acronym := str[priceIndex[0]:priceIndex[1]]
 
-		transaction.price = Price.FindString(price_acronym)
-		transaction.acronym = Acronym.FindString(price_acronym)
-		transaction.description = str[priceIndex[1]:len(str)]
+		transaction.Price = Price.FindString(price_acronym)
+		transaction.Acronym = Acronym.FindString(price_acronym)
+		transaction.Description = str[priceIndex[1]:len(str)]
 	}
 	if len(typeIndex) != 0 && len(priceIndex) != 0 {
 		find := str[typeIndex[1]-2 : priceIndex[0]]
 		find = strings.Trim(find, " ")
-		transaction.status = find
+		transaction.Status = find
 	}
 	str = strings.ReplaceAll(str, " ", "")
 
 	if Date.MatchString(str) {
 		dateIndex = Date.FindStringIndex(str)
-		transaction.date = str[dateIndex[0]:dateIndex[1]]
+		transaction.Date = str[dateIndex[0]:dateIndex[1]]
 	}
 	if Time.MatchString(str) {
 		timeIndex = Time.FindStringIndex(str)
-		transaction.time = str[timeIndex[0]:timeIndex[1]]
+		transaction.Time = str[timeIndex[0]:timeIndex[1]]
 	}
 
 }
@@ -172,11 +172,11 @@ func Csv(t []Transaction) {
 	debit := []string{"Безналичная операция", "Отправление средств", "Банкомат"}
 	str := "ID;DATE;TIME;TYPE_OF_TRANSACTION;STATUS;PRICE;ACRONYM;DESCRIPTION\n"
 	for _, transaction := range t {
-		if contains(debit, transaction.typeof) {
-			transaction.price = "-" + transaction.price
+		if contains(debit, transaction.Typeof) {
+			transaction.Price = "-" + transaction.Price
 		}
-		temp := []string{transaction.id, transaction.date, transaction.time,
-			transaction.typeof, transaction.status, transaction.price, transaction.acronym, transaction.description}
+		temp := []string{transaction.Id, transaction.Date, transaction.Time,
+			transaction.Typeof, transaction.Status, transaction.Price, transaction.Acronym, transaction.Description}
 		str += strings.Join(temp, ";")
 		str += "\n"
 	}
@@ -189,10 +189,10 @@ func (t TransactionSlice) sort() {
     slices.SortFunc(t, func(a, b Transaction) int {
         layout := "2006-01-02 15:04:05"
 
-        dateA, err := time.Parse(layout, a.date + " " + a.time)
+        dateA, err := time.Parse(layout, a.Date + " " + a.Time)
         check(err)
 
-        dateB, err := time.Parse(layout, b.date + " " + b.time)
+        dateB, err := time.Parse(layout, b.Date + " " + b.Time)
         check(err)
 
         if dateA.Before(dateB) {
